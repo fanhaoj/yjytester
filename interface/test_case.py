@@ -31,10 +31,10 @@ class Test_Interyjy():
         assert r.status_code==200
 
     #取消订单
-    def test_cancel(self,fxLogin,buyprocedure):
+    def test_cancel(self,fxLogin,ticketdetail):
         url = "http://yjy.zhiyousx.com:8765/api/order/order/ticket/cancel"
-        data = {"orderSn": buyprocedure}
+        data = {"orderSn": ticketdetail}
         headers = {"Authorization": fxLogin, "Content-Type": "application/x-www-form-urlencoded"}
-        r = requests.post(url, data, headers)
-        print(r.text)
+        r = requests.post(url, data=data, headers=headers)
+        print(r.text+"cancel")
         assert r.status_code==200
