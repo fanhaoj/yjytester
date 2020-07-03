@@ -7,15 +7,17 @@ print(date)
 
 
 
-@pytest.fixture(autouse=True)
+@pytest.fixture(scope="session")
 def open():
     print("打开浏览器")
+    a=11
+    yield a
 
-def test_one():
-    print("test_one")
+def test_one(open):
+    print(f"{open}test_one")
 
-def test_two():
-    print("test_two")
+def test_two(open):
+    print(f"{open}test_two")
 
 if __name__ == '__main__':
     pytest.main()
