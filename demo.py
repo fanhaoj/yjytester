@@ -20,4 +20,4 @@ def test_two(open):
     print(f"{open}test_two")
 
 if __name__ == '__main__':
-    pytest.main()
+    pytest.main('v')

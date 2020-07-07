@@ -1,41 +1,30 @@
 import requests
 
 from apireq.base_api import BaseApi
+from apireq.wework import Wework
 
 
 class Address(BaseApi):
-    def get_token(self):
-        res = None
-        # 获取 token
-        # while FileLock("session.lock"):
-        corpid = "wwa26dee94d70aa6e7"
-        corpsecret = "TM-PNqujpmiAo46PQGBiikCWEYFXWzD8RYjmi0d--EU"
-        data={
-            "method": "get",
-            "url": "https://qyapi.weixin.qq.com/cgi-bin/gettoken",
-            "param": {
-                "corpid": corpid,
-                "corpsecret": corpsecret
-            }
-        }
-        self.send(**data)["access_token"]
+    def __init__(self):
+        corpsecret = "TM-PNqujpmiAo46PQGBiivxvYdT0X9qJ6XroMHt8QUA"
+        self.token=Wework().get_token(corpsecret)
 
-    def get(self,get_token,userid):
+    def get(self,userid):
         data = {
             "method": "get",
             "url": "https://qyapi.weixin.qq.com/cgi-bin/user/get",
-            "param": {
-                     "access_token":get_token,
+            "params": {
+                     "access_token":self.token,
                      "userid": userid
         }
         }
-        self.send(**data)
+        return self.send(data)
 
-    def create(self,get_token,userid,name,mobile):
+    def create(self,userid,name,mobile):
         data = {
             "method": "post",
             "url": "https://qyapi.weixin.qq.com/cgi-bin/user/create",
-            "param": {"access_token":get_token},
+            "params": {"access_token":self.token},
             "json":{
                 "userid": userid,
                 "name": name,
@@ -43,29 +32,31 @@ class Address(BaseApi):
                 "department": [1],
             }
         }
-        self.send(**data)
+        return self.send(data)
 
-    def update(self,get_token,userid,name,mobile):
+    def update(self,userid,name,mobile):
         data={
             "method": "post",
             "url": "https://qyapi.weixin.qq.com/cgi-bin/user/update",
-            "param": {"access_token": get_token},
+            "params": {"access_token": self.token},
             "json": {
                 "userid": userid,
                 "name": name,
                 "mobile": mobile,
             }
         }
-        self.send(**data)
+        return self.send(data)
 
-    def delete(self,get_token,userid):
+    def delete(self,userid):
         data = {
-            "method": "get",
+            "method":"get",
             "url": "https://qyapi.weixin.qq.com/cgi-bin/user/delete",
-            "param": {
-                     "access_token":get_token,
+            "params": {
+                     "access_token":self.token,
                      "userid": userid
         }
         }
-        self.send(**data)
+        return self.send(data)
 
+if __name__ == '__main__':
+    print(Address().delete("wu123fff2"))

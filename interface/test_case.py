@@ -53,7 +53,8 @@ class Test_Interyjy():
         headers = {"Authorization": gyLogin, "Content-Type": "application/json"}
         r=requests.post(url,data=data,headers=headers)
 
-    def test_
+    def test_ff(self):
+        pass
 
 if __name__ == '__main__':
     pytest.main()
