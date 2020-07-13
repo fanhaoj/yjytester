@@ -14,6 +14,3 @@ except Exception as err:
     print(1,err)
 else:
     print(2)
-
-if __name__ == '__main__':
-    python -m pytest[test_mye]
