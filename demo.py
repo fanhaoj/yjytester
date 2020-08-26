@@ -19,5 +19,14 @@ def test_one(open):
 def test_two(open):
     print(f"{open}test_two")
 
+
+def demo(*a,**b):
+    print(a,b)
+
 if __name__ == '__main__':
-    pytest.main('v')
+    # pytest.main('v')
+    a=1
+    b=2
+    c=3
+    d={'e':1,'f':2}
+    demo(a,b,c,e=1,f=2)

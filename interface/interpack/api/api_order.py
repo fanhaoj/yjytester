@@ -1,18 +1,19 @@
-from interface.interpack.base_api import BaseApi
-from interface.interpack.unitl import Unitl
+from interface.interpack.api.base_api import BaseApi
+from interface.interpack.api.base_gettoken import Unitl
 
 
-class ApiMeth(BaseApi):
+class ApiOrder(BaseApi):
     def __init__(self):
         u=Unitl()
         self.gytoken=u.gyLogin()
         self.fxtoken=u.fxLogin()
 
+
     #下单
     def buyprocedure(self,date,productid):
         data = {
             "method": "post",
-            "url": "http://yjy.zhiyousx.com:8765//api/order/order/ticket/create",
+            "url": "http://yjy.zhiyousx.com:8765/api/order/order/ticket/create",
             "headers": {"Authorization": self.fxtoken, "Content-Type": "application/json"},
             "json": {
                 "departDate": date,
@@ -27,10 +28,10 @@ class ApiMeth(BaseApi):
     def payprocedure(self,buyorderid):
         data = {
             "method": "post",
-            "url": "http://yjy.zhiyousx.com:8765//api/order/order/ticket/pay/credit",
-            "headers": {"Authorization": self.fxtoken, "Content-Type": "application/json"},
+            "url": "http://yjy.zhiyousx.com:8765/api/order/order/ticket/pay/credit",
+            "headers": {"Authorization": self.fxtoken},
             "params": {
-                "orderId": buyorderid
+                "orderId":buyorderid
             }
         }
         return self.send(data)
@@ -53,19 +54,19 @@ class ApiMeth(BaseApi):
     def verify(self,buyorderid):
         data={
             "method": "post",
-            "url": "http://yjy.zhiyousx.com:8765//api/order/order/ticket/verify",
+            "url": "http://yjy.zhiyousx.com:8765/api/order/order/ticket/verify",
             "headers": {"Authorization": self.gytoken, "Content-Type": "application/json"},
             "json":{
                 "num":1,"orderId":buyorderid
             }
         }
-        self.send(data)
+        return self.send(data)
 
     # 查询订单详情
     def ticketdetail(self,buyorderid):
         data = {
             "method": "get",
-            "url": "http://yjy.zhiyousx.com:8765//api/order/order/ticket/" + str(buyorderid) + "/detail",
+            "url": "http://yjy.zhiyousx.com:8765/api/order/order/ticket/" + str(buyorderid) + "/detail",
             "headers": {"Authorization": self.fxtoken},
         }
         return self.send(data)
@@ -88,7 +89,7 @@ class ApiMeth(BaseApi):
             "method": "post",
             "url": "http://yjy.zhiyousx.com:8765/api/order/order/ticket/cancel",
             "headers": {"Authorization": self.fxtoken, "Content-Type": "application/x-www-form-urlencoded"},
-            "json": {
+            "data": {
                 "orderSn":ordersn
             }
         }
@@ -97,8 +98,8 @@ class ApiMeth(BaseApi):
     # 查询订单详情
     def ticketdetail(self, buyorderid):
         data={
-            "method":"post",
-            'url':f"http://yjy.zhiyousx.com:8765//api/order/order/ticket/{buyorderid}/detail",
+            "method":"get",
+            'url':f"http://yjy.zhiyousx.com:8765/api/order/order/ticket/{buyorderid}/detail",
             "headers":{"Authorization": self.gytoken}
         }
         return self.send(data)
@@ -108,7 +109,7 @@ class ApiMeth(BaseApi):
     def remessage(self,contactsMobile,ordersn):
         data={
             "method": "post",
-            'url': "http://yjy.zhiyousx.com:8765//api/order/order/ticket/resendMessage",
+            'url': "http://yjy.zhiyousx.com:8765/api/order/order/ticket/resendMessage",
             "headers": {"Authorization": self.gytoken},
             "json":{
                 "contactsMobile": contactsMobile,
@@ -130,3 +131,11 @@ class ApiMeth(BaseApi):
         }
         return self.send(data)
 
+if __name__ == '__main__':
+    a=ApiOrder()
+    id=a.buyprocedure('2020-08-21','1317')
+    # res=a.payprocedure(id['data']['id'])
+    print(id)
+    # print(res)
+    # print(a.payprocedure(id))
+    # print(res)
