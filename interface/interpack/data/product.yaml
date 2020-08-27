@@ -1,5 +1,5 @@
 headers:
-  Authorization: ${self.gytoken}
+  Authorization: ${gytoken}
   Content-Type: application/json
 json:
   bookDayLimit: '0'
