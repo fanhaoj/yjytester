@@ -30,6 +30,7 @@ class Until(BaseApi):
             }
         }
         return self.send(data)["data"]
+
     #生成yaml文件
     def convent_yaml(self):
         data={
@@ -45,6 +46,8 @@ class Until(BaseApi):
         }
         with open("../data/order.yaml","w",encoding='utf-8') as f:
             yaml.safe_dump(data=data,stream=f,allow_unicode=True)
+
+
 
 
 

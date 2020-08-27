@@ -2,9 +2,10 @@ import allure
 
 from interface.interpack.api.api_product import ApiProduct
 
+
 @allure.feature("产品相关")
 class TestProduct:
-#allure执行：pytest test_product.py --allure-feature "产品相关"
+#allure执行：pytest test_product.py --allure-features "产品相关"
     def setup(self):
         self.a=ApiProduct()
 

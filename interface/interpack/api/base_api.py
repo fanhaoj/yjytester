@@ -5,7 +5,10 @@ import yaml
 
 
 class BaseApi():
+
     def send(self,data):
+        self.env = yaml.safe_load(open("../data/env.yaml", "r"))
+        data["url"]=str(data["url"]).replace("yjy.zhiyousx.com:8765",self.env["test-env"][self.env["default"]])
         return requests.request(**data).json()
 
     def template(self,file,data):
