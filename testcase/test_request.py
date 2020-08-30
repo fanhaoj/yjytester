@@ -3,11 +3,9 @@
 import re
 
 import pytest
-import requests
-from filelock import FileLock
 
 from apireq.api_address import Address
-from apireq.base_api import BaseApi
+from interface.interpack.api.base_api import BaseApi
 from apireq.wework import Wework
 
 

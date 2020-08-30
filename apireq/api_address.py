@@ -1,6 +1,4 @@
-import requests
-
-from apireq.base_api import BaseApi
+from interface.interpack.api.base_api import BaseApi
 from apireq.wework import Wework
 
 

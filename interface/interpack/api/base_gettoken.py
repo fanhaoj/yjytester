@@ -30,7 +30,6 @@ class Unitl(BaseApi):
             }
         }
         r=self.send(data)
-        print(r)
         fxtoken=r['data']
         return fxtoken
 
