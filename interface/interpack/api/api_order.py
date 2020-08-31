@@ -1,15 +1,29 @@
+import datetime
+import time
+
 from interface.interpack.api.base_api import BaseApi
-from interface.interpack.api.base_gettoken import Unitl
+from interface.interpack.until.until import Until
 
 
 class ApiOrder(BaseApi):
+
     def __init__(self):
-        u=Unitl()
-        self.gytoken=u.gyLogin()
-        self.fxtoken=u.fxLogin()
+        self.date = time.strftime("%Y-%m-%d", time.localtime())
+        u=Until()
+        self.gytoken=u.gytoken()
+        self.fxtoken=u.fxtoken()
 
+    def createticket(self):
+        data={
+            "gytoken":self.fxtoken,
+            "date": "2018-08-29"
+        }
+        print(data)
+        data=self.reqtemplate("../data/order.yaml",data)
+        print(data)
+        return self.send(data)
 
-    #下单
+#下单
     def buyprocedure(self,date,productid):
         data = {
             "method": "post",
@@ -134,8 +148,7 @@ class ApiOrder(BaseApi):
 if __name__ == '__main__':
     a=ApiOrder()
     id=a.buyprocedure('2020-08-21','1317')
-    # res=a.payprocedure(id['data']['id'])
-    print(id)
-    # print(res)
-    # print(a.payprocedure(id))
-    # print(res)
+
+
+if __name__ == '__main__':
+    ApiOrder()
