@@ -13,5 +13,12 @@ class ApiProduct(BaseApi):
         data={
             "gytoken":self.gytoken
         }
-        data=self.template("../data/product.yaml", data)
+        data=self.reqtemplate("../data/product.yaml", data,"createproduct")
+        return self.send(data)
+
+    def modify_product(self):
+        data={
+            "gytoken":self.gytoken
+        }
+        data=self.reqtemplate("../data/product.yaml",data,"modify")
         return self.send(data)

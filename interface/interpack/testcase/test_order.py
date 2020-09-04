@@ -7,7 +7,7 @@ import yaml
 
 from interface.interpack.api.api_order import ApiOrder
 date = time.strftime("%Y-%m-%d", time.localtime())
-dataparm=yaml.safe_load(open("../data/buyproduce.yaml"))
+dataparm=yaml.safe_load(open("../data/order_data.yaml"))
 
 class TestOrder:
 
