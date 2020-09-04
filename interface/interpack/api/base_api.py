@@ -16,4 +16,5 @@ class BaseApi():
         with open(file,"r",encoding='utf-8') as f:
             steps=yaml.safe_load(f)[name]
             re=Template(str(steps)).safe_substitute(data)
+            # print(re)
             return yaml.safe_load(re)

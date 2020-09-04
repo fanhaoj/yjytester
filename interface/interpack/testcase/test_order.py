@@ -68,3 +68,26 @@ class TestOrder:
         print(verifycode)
         json = self.api.miniverify(scenicSpotId, verifycode)
         assert json["msg"] == "success"
+
+    @allure.story("分销用户常用旅客")
+    def test_TopContactsList(self):
+        json=self.api.TopContactsList()
+        assert json["msg"] == "success"
+
+    @allure.story("消息队列测试接口")
+    def test_mqTest(self):
+        json=self.api.mqTest()
+        assert json["msg"] == "success"
+
+    @allure.story("手动处理出票中订单到出票失败")
+    def test_ManualProcessing(self):
+        json=self.api.ManualProcessing()
+        assert json["msg"] == "success"
+
+    @allure.story("手动处理退款中订单")
+    @pytest.mark.parametrize("buyorderid", [])
+    def test_manuallyProcessRefundOrders(self,buyorderid):
+        orderid = self.api.buyprocedure()
+        json=self.api.manuallyProcessRefundOrders(buyorderid)
+        assert json["msg"] == "success"
+

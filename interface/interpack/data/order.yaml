@@ -80,3 +80,36 @@ miniverify: #小程序核销
   json:
     scenicSpotId: $scenicSpotId
     verifyCode: $verifyCode
+
+TopContactsList: #分销用户常用旅客
+  method: get
+  url: http://yjy.zhiyousx.com:8765/api/order/order/ticket/TopContactsList
+  headers:
+    Authorization: $fxtoken
+    Content-Type: application/x-www-form-urlencoded
+
+mqTest: # 消息队列测试接口
+  method: post
+  url: http://yjy.zhiyousx.com:8765/api/order/order/ticket/app/mqTest
+  headers:
+    Authorization: $fxtoken
+    Content-Type: application/x-www-form-urlencoded
+
+ManualProcessing: #手动处理出票中订单到出票失败
+  method: get
+  url: http://yjy.zhiyousx.com:8765/api/order/order/ticket/failedToIssueTicketsInManualProcessing
+  headers:
+    Authorization: $fxtoken
+    Content-Type: application/x-www-form-urlencoded
+  params:
+    orderId: $buyorderid
+
+manuallyProcessRefundOrders: #手动处理退款中订单
+  method: get
+  url: http://yjy.zhiyousx.com:8765/api/order/order/ticket/manuallyProcessRefundOrders
+  headers:
+    Authorization: $fxtoken
+    Content-Type: application/x-www-form-urlencoded
+  params:
+    orderId: $buyorderid
+    processingStatus: $status

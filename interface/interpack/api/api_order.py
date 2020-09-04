@@ -71,7 +71,7 @@ class ApiOrder(BaseApi):
     def cancel(self,ordersn):
         data={
             "fxtoken":self.fxtoken,
-            "buyorderid":ordersn
+            "ordersn":ordersn
         }
         data=self.reqtemplate("../data/order.yaml",data,"cancel")
         return self.send(data)
@@ -95,6 +95,42 @@ class ApiOrder(BaseApi):
             }
         data=self.reqtemplate("../data/order.yaml",data,"miniverify")
         return self.send(data)
+
+    # 分销用户常用旅客
+    def TopContactsList(self):
+        data={
+            "fxtoken": self.fxtoken
+        }
+        data=self.reqtemplate("../data/order.yaml",data,"TopContactsList")
+        return self.send(data)
+
+    # 消息队列测试接口
+    def mqTest(self):
+        data={
+            "fxtoken": self.fxtoken
+        }
+        data=self.reqtemplate("../data/order.yaml",data,"mqTest")
+        return self.send(data)
+
+    #手动处理出票中订单到出票失败
+    def ManualProcessing(self,buyorderid):
+        data={
+            "fxtoken": self.fxtoken,
+            "buyorderid": buyorderid
+        }
+        data=self.reqtemplate("../data/order.yaml",data,"ManualProcessing")
+        return self.send(data)
+
+    #手动处理退款中订单
+    def manuallyProcessRefundOrders(self,buyorderid):
+        data={
+            "fxtoken": self.fxtoken,
+            "buyorderid": buyorderid,
+            "status":0
+        }
+        data=self.reqtemplate("../data/order.yaml",data,"ManualProcessing")
+        return self.send(data)
+
 
 if __name__ == '__main__':
     a=ApiOrder()
