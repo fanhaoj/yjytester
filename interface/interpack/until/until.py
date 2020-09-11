@@ -1,3 +1,4 @@
+import time
 
 import yaml
 
@@ -44,8 +45,23 @@ class Until(BaseApi):
                 }
             ]
         }
-        with open("../data/order.yaml","w",encoding='utf-8') as f:
+        with open("../data/trip-order/order_data.yaml", "w", encoding='utf-8') as f:
             yaml.safe_dump(data=data,stream=f,allow_unicode=True)
+
+    def begindate(self):
+        date = time.strftime("%Y-%m-%d", time.localtime())
+        return date
+
+    def enddate(self):
+        date = "2022-12-31"
+        return date
+
+    def makedatatest(self,file,proname,key):
+        with open(file,"r",encoding='utf-8') as f:
+            re=str(yaml.safe_load(f)[proname][key])
+            print(re)
+            return re
+
 
 
 
@@ -53,4 +69,5 @@ class Until(BaseApi):
 
 
 if __name__ == '__main__':
-    Until().convent_yaml()
+    # Until().convent_yaml()
+    Until().makedatatest("../data/trip-order/order_data.yaml","proqmp","productid")

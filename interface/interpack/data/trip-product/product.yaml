@@ -14,8 +14,8 @@ createproduct:
     sceneryId: '71'
     sellType: ALL
     sellDate:
-      - beginSellDate: '2020-09-03'
-        endSellDate: '2021-10-30'
+      - beginSellDate: ${begindate}
+        endSellDate: ${enddate}
         setWeeks:
           - '7'
           - '1'

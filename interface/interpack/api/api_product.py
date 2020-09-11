@@ -8,17 +8,21 @@ class ApiProduct(BaseApi):
         u=Until()
         self.fxtoken=u.fxtoken()
         self.gytoken=u.gytoken()
+        self.begindate=u.begindate()
+        self.enddate=u.enddate()
 
     def create_product(self):
         data={
-            "gytoken":self.gytoken
+            "gytoken":self.gytoken,
+            "begindate":self.begindate,
+            "enddate":self.enddate
         }
-        data=self.reqtemplate("../data/product.yaml", data,"createproduct")
+        data=self.reqtemplate("../data/trip-product/product.yaml", data, "createproduct")
         return self.send(data)
 
     def modify_product(self):
         data={
             "gytoken":self.gytoken
         }
-        data=self.reqtemplate("../data/product.yaml",data,"modify")
+        data=self.reqtemplate("../data/trip-product/product.yaml", data, "modify")
         return self.send(data)

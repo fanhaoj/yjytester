@@ -1,0 +1,3 @@
+
+将执行流程及关键步骤打印出来，参考hrun -s testcases打印日志
+将pytest -s 详细日志写出报村

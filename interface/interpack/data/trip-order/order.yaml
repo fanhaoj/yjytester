@@ -6,7 +6,7 @@ buyprocedure: #下单
     Content-Type: application/json
   json:
     departDate: $date
-    productId: '1317'
+    productId:  $productId
     productNum: '1'
     touristInfo:
     - mobile: '15009253686'
@@ -40,9 +40,9 @@ verify: #核销
 
 ticketdetail: #查看订单详情
   method: get
-  url: http://yjy.zhiyousx.com:8765/api/order/order/ticket/$buyorderid/detail
+  url: http://yjy.zhiyousx.com:8765/api/order/order/ticket/${buyorderid}/detail
   headers:
-    Authorization: $fxtoken
+    Authorization: $gytoken
 
 verify_h5:  # h5页面订单详情查询
   method: post

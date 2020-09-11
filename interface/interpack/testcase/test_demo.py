@@ -8,7 +8,7 @@ class TestDemo:
         data={
             "gytoken":"dsfsdfsdfsfsssfdffffff"
         }
-        with open("../data/product.yaml",'r',encoding='utf-8') as f:
+        with open("../data/trip-product/product.yaml", 'r', encoding='utf-8') as f:
             steps=yaml.safe_load(f)
             print(steps)
             re=Template(str(steps)).safe_substitute(data)
