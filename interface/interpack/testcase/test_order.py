@@ -4,6 +4,7 @@ import time
 import allure
 import pytest
 import yaml
+import pytest_assume
 
 from interface.interpack.api.api_order import ApiOrder
 from interface.interpack.until.until import Until
@@ -13,6 +14,10 @@ class TestOrder:
 
     def setup(self):
         self.api=ApiOrder()
+
+    def teardown(self):
+        pass
+
 
     @allure.story("下单")
     @pytest.mark.parametrize("productid", [Until().makedatatest("../data/trip-order/order_data.yaml","proqmp","productid")])
@@ -57,6 +62,15 @@ class TestOrder:
         orderid = self.api.buyprocedure(productid)['data']['id']
         print(orderid)
         self.api.payprocedure(orderid)
+        try:
+            orderstatus = self.api.ticketdetail(orderid)["data"]["orderStatus"]
+            assert orderstatus == 3
+        except:
+            bool = True
+            while (bool):
+                orderstatus = self.api.ticketdetail(orderid)["data"]["orderStatus"]
+                if orderstatus == 3:
+                    bool = False
         json = self.api.verify(orderid)
         assert json["msg"] == "success"
 
@@ -65,9 +79,16 @@ class TestOrder:
     def test_miniverify(self, productid, scenicSpotId):
         orderid = self.api.buyprocedure(productid)['data']['id']
         self.api.payprocedure(orderid)
-        print(orderid)
+        try:
+            orderstatus=self.api.ticketdetail(orderid)["data"]["orderStatus"]
+            assert orderstatus == 3
+        except:
+            bool=True
+            while(bool):
+                orderstatus = self.api.ticketdetail(orderid)["data"]["orderStatus"]
+                if orderstatus == 3:
+                    bool=False
         verifycode = self.api.ticketdetail(orderid)["data"]["ticketInfo"][0]['verifyCode']
-        print(verifycode)
         json = self.api.miniverify(scenicSpotId, verifycode)
         assert json["msg"] == "success"
 

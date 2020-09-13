@@ -32,8 +32,10 @@ class Until(BaseApi):
         }
         return self.send(data)["data"]
 
-    #生成yaml文件
     def convent_yaml(self):
+        """
+        生成yaml文件
+        """
         data={
             "departDate": "2020-08-19",
             "productId": "1317",
@@ -49,14 +51,29 @@ class Until(BaseApi):
             yaml.safe_dump(data=data,stream=f,allow_unicode=True)
 
     def begindate(self):
+        """
+
+        :return:开始日期
+        """
         date = time.strftime("%Y-%m-%d", time.localtime())
         return date
 
     def enddate(self):
+        """
+
+        :return:结束日期
+        """
         date = "2022-12-31"
         return date
 
     def makedatatest(self,file,proname,key):
+        """
+
+        :param file:添加数据驱动文件
+        :param proname:数据类型名称
+        :param key:数据key值
+        :return:
+        """
         with open(file,"r",encoding='utf-8') as f:
             re=str(yaml.safe_load(f)[proname][key])
             print(re)

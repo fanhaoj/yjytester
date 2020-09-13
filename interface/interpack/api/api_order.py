@@ -39,6 +39,7 @@ class ApiOrder(BaseApi):
             "buyorderid":buyorderid
         }
         data=self.reqtemplate("../data/trip-order/order.yaml", data, "refund")
+        print(self.send(data))
         return self.send(data)
 
     #核销
@@ -57,7 +58,6 @@ class ApiOrder(BaseApi):
             "buyorderid":buyorderid
         }
         data=self.reqtemplate("../data/trip-order/order.yaml", data, "ticketdetail")
-        print(self.send(data))
         return self.send(data)
 
     # h5页面订单详情查询
@@ -136,4 +136,4 @@ class ApiOrder(BaseApi):
 
 if __name__ == '__main__':
     a=ApiOrder()
-    id=a.buyprocedure('2020-08-21','1317')
+    a.ticketdetail(117190)
