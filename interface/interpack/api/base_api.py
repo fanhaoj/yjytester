@@ -1,3 +1,4 @@
+import json
 from string import Template
 
 import requests
@@ -11,7 +12,9 @@ class BaseApi():
         data["url"]=str(data["url"]).replace("yjy.zhiyousx.com:8765",self.env["test-env"][self.env["default"]])
         return requests.request(**data).json()
 
-    def template(self,file,data):
+    def reqtemplate(self,file,data,name):
         with open(file,"r",encoding='utf-8') as f:
-            re=Template(f.read()).safe_substitute(data)
+            steps=yaml.safe_load(f)[name]
+            re=Template(str(steps)).safe_substitute(data)
+            # print(re)
             return yaml.safe_load(re)

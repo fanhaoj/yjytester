@@ -1,0 +1,17 @@
+getErrorType: #获取错误类型
+  method: GET
+  url: http://yjy.zhiyousx.com:8765/api/order/orderError/getErrorType
+  headers:
+    Accept: '*/*'
+    Accept-Encoding: gzip, deflate
+    Accept-Language: zh-CN,zh;q=0.9
+    Authorization: $fxtoken
+    Connection: keep-alive
+    Content-Type: application/x-www-form-urlencoded
+    Cookie: pgv_pvi=4403292160; Hm_lvt_3bdddbba942b66617571e5479df10553=1596795827,1597047538;
+      pgv_si=s3275353088; userName=admin; userID=1; token_bs=eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInVzZXJJZCI6IjEiLCJwaG9uZSI6IiIsImNlcnRpZmljYXRpb25UeXBlIjoiMCIsInJvbGVJZCI6IjEiLCJEYXRhQXV0aElkIjoiIiwicGFyZW50SWQiOiIxIiwiZGF0YUF1dGhUeXBlIjoiMSIsInVzZXJIb3N0IjoiMTI0LjExNC4xNTEuODIiLCJleHAiOjE1OTk1ODc1NDB9.Ka5F-UNqEdIFOjmnPYuTRLNJ-umAClRr5q3AZQv4gbX7Iu065DlIPR_KW8akj7qOeWBfxmhVga0GvnK4xXOREgDHNU7Ia4szZm3aRKwFD-FIa14Z6nxixbqWj4pU8y-Ww-dO_IbQhe_l1fr5dhblzO7HTSGskHf_mJHUZkAWRTM
+    Host: yjy.zhiyousx.com:8765
+    Referer: http://yjy.zhiyousx.com:8765/doc.html
+    Request-Origion: Knife4j
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
+      (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36

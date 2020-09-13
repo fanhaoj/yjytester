@@ -1,0 +1,115 @@
+buyprocedure: #下单
+  method: post
+  url: http://yjy.zhiyousx.com:8765/api/order/order/ticket/create
+  headers:
+    Authorization: $fxtoken
+    Content-Type: application/json
+  json:
+    departDate: $date
+    productId:  $productId
+    productNum: '1'
+    touristInfo:
+    - mobile: '15009253686'
+      name: 测试
+
+payprocedure: #支付
+  method: post
+  url: http://yjy.zhiyousx.com:8765/api/order/order/ticket/pay/credit
+  headers:
+    Authorization: $fxtoken
+  params:
+    orderId: $buyorderid
+
+refund: #退款
+  method: post
+  url: http://yjy.zhiyousx.com:8765/api/order/order/ticket/refund
+  headers:
+    Authorization: $fxtoken
+  json:
+    orderId: $buyorderid
+
+verify: #核销
+  method: post
+  url: http://yjy.zhiyousx.com:8765/api/order/order/ticket/verify
+  headers:
+    Authorization: $fxtoken
+    Content-Type: application/json
+  json:
+    num: 1
+    orderId: $buyorderid
+
+ticketdetail: #查看订单详情
+  method: get
+  url: http://yjy.zhiyousx.com:8765/api/order/order/ticket/${buyorderid}/detail
+  headers:
+    Authorization: $gytoken
+
+verify_h5:  # h5页面订单详情查询
+  method: post
+  url: http://yjy.zhiyousx.com:8765/api/order/external/orderDetail
+  headers:
+    Authorization: $fxtoken
+    Content-Type: application/json
+  json:
+    orderId: $buyorderid
+
+cancel: #取消订单
+  method: post
+  url: http://yjy.zhiyousx.com:8765/api/order/order/ticket/cancel
+  headers:
+    Authorization: $fxtoken
+    Content-Type: application/x-www-form-urlencoded
+  data:
+    orderSn: $ordersn
+
+remessage: #重发短信
+  method: post
+  url: http://yjy.zhiyousx.com:8765/api/order/order/ticket/resendMessage
+  headers:
+    Authorization: $gytoken
+  json:
+    contactsMobile: $contactsMobile
+    orderSn: $ordersn
+
+miniverify: #小程序核销
+  method: post
+  url: http://yjy.zhiyousx.com:8765/api/order/order/ticket/app/verify
+  headers:
+    Authorization: $gytoken
+    Content-Type: application/json
+  json:
+    scenicSpotId: $scenicSpotId
+    verifyCode: $verifyCode
+
+TopContactsList: #分销用户常用旅客
+  method: get
+  url: http://yjy.zhiyousx.com:8765/api/order/order/ticket/TopContactsList
+  headers:
+    Authorization: $fxtoken
+    Content-Type: application/x-www-form-urlencoded
+
+mqTest: # 消息队列测试接口
+  method: post
+  url: http://yjy.zhiyousx.com:8765/api/order/order/ticket/app/mqTest
+  headers:
+    Authorization: $fxtoken
+    Content-Type: application/x-www-form-urlencoded
+
+ManualProcessing: #手动处理出票中订单到出票失败
+  method: get
+  url: http://yjy.zhiyousx.com:8765/api/order/order/ticket/failedToIssueTicketsInManualProcessing
+  headers:
+    Authorization: $fxtoken
+    Content-Type: application/x-www-form-urlencoded
+  params:
+    orderId: $buyorderid
+
+manuallyProcessRefundOrders: #手动处理退款中订单
+  method: get
+  url: http://yjy.zhiyousx.com:8765/api/order/order/ticket/manuallyProcessRefundOrders
+  headers:
+    Authorization: $fxtoken
+    Content-Type: application/x-www-form-urlencoded
+  params:
+    orderId: $buyorderid
+    processingStatus: $status

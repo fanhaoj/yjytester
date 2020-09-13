@@ -8,147 +8,132 @@ from interface.interpack.until.until import Until
 class ApiOrder(BaseApi):
 
     def __init__(self):
-        self.date = time.strftime("%Y-%m-%d", time.localtime())
         u=Until()
         self.gytoken=u.gytoken()
         self.fxtoken=u.fxtoken()
+        self.begindate=u.begindate()
 
-    def createticket(self):
+    #下单
+    def buyprocedure(self,productid):
         data={
-            "gytoken":self.fxtoken,
-            "date": "2018-08-29"
+            "fxtoken":self.fxtoken,
+            "date":self.begindate,
+            "productId": productid
         }
-        print(data)
-        data=self.reqtemplate("../data/order.yaml",data)
-        print(data)
-        return self.send(data)
-
-#下单
-    def buyprocedure(self,date,productid):
-        data = {
-            "method": "post",
-            "url": "http://yjy.zhiyousx.com:8765/api/order/order/ticket/create",
-            "headers": {"Authorization": self.fxtoken, "Content-Type": "application/json"},
-            "json": {
-                "departDate": date,
-                "productId": productid,
-                "productNum": "1",
-                "touristInfo": [{"name": "测试", "mobile": "15009253686"}]
-            }
-        }
+        data=self.reqtemplate('../data/trip-order/order.yaml', data, "buyprocedure")
         return self.send(data)
 
     #支付
     def payprocedure(self,buyorderid):
-        data = {
-            "method": "post",
-            "url": "http://yjy.zhiyousx.com:8765/api/order/order/ticket/pay/credit",
-            "headers": {"Authorization": self.fxtoken},
-            "params": {
-                "orderId":buyorderid
-            }
+        data={
+            "fxtoken":self.fxtoken,
+            "buyorderid":buyorderid
         }
+        data=self.reqtemplate("../data/trip-order/order.yaml", data, "payprocedure")
         return self.send(data)
 
     #退款
     def refund(self,buyorderid):
-        data = {
-            "method": "post",
-            "url": "http://yjy.zhiyousx.com:8765/api/order/order/ticket/refund",
-            "headers": {"Authorization": self.fxtoken, "Content-Type": "application/json"},
-            "json": {
-                "orderId":buyorderid,
-                "reason":"拍错退款",
-                "refundNum":1
-            }
+        data={
+            "fxtoken":self.fxtoken,
+            "buyorderid":buyorderid
         }
+        data=self.reqtemplate("../data/trip-order/order.yaml", data, "refund")
         return self.send(data)
 
     #核销
     def verify(self,buyorderid):
         data={
-            "method": "post",
-            "url": "http://yjy.zhiyousx.com:8765/api/order/order/ticket/verify",
-            "headers": {"Authorization": self.gytoken, "Content-Type": "application/json"},
-            "json":{
-                "num":1,"orderId":buyorderid
-            }
+            "fxtoken":self.gytoken,
+            "buyorderid":buyorderid
         }
+        data=self.reqtemplate("../data/trip-order/order.yaml", data, "verify")
         return self.send(data)
 
     # 查询订单详情
     def ticketdetail(self,buyorderid):
-        data = {
-            "method": "get",
-            "url": "http://yjy.zhiyousx.com:8765/api/order/order/ticket/" + str(buyorderid) + "/detail",
-            "headers": {"Authorization": self.fxtoken},
+        data={
+            "gytoken":self.gytoken,
+            "buyorderid":buyorderid
         }
+        data=self.reqtemplate("../data/trip-order/order.yaml", data, "ticketdetail")
+        print(self.send(data))
         return self.send(data)
 
     # h5页面订单详情查询
     def verify_h5(self,buyorderid):
-        data = {
-            "method": "post",
-            "url": "http://yjy.zhiyousx.com:8765/api/order/external/orderDetail",
-            "headers": {"Authorization": self.fxtoken, "Content-Type": "application/json"},
-            "json": {
-                "orderId":buyorderid,
-            }
+        data={
+            "fxtoken":self.fxtoken,
+            "buyorderid":buyorderid
         }
+        data=self.reqtemplate("../data/trip-order/order.yaml", data, "verify_h5")
         return self.send(data)
 
     #取消订单
     def cancel(self,ordersn):
-        data = {
-            "method": "post",
-            "url": "http://yjy.zhiyousx.com:8765/api/order/order/ticket/cancel",
-            "headers": {"Authorization": self.fxtoken, "Content-Type": "application/x-www-form-urlencoded"},
-            "data": {
-                "orderSn":ordersn
-            }
-        }
-        return  self.send(data)
-
-    # 查询订单详情
-    def ticketdetail(self, buyorderid):
         data={
-            "method":"get",
-            'url':f"http://yjy.zhiyousx.com:8765/api/order/order/ticket/{buyorderid}/detail",
-            "headers":{"Authorization": self.gytoken}
+            "fxtoken":self.fxtoken,
+            "ordersn":ordersn
         }
+        data=self.reqtemplate("../data/trip-order/order.yaml", data, "cancel")
         return self.send(data)
-
 
     #重发短信
     def remessage(self,contactsMobile,ordersn):
         data={
-            "method": "post",
-            'url': "http://yjy.zhiyousx.com:8765/api/order/order/ticket/resendMessage",
-            "headers": {"Authorization": self.gytoken},
-            "json":{
-                "contactsMobile": contactsMobile,
-                "orderSn": ordersn
-            }
+            "gytoken":self.gytoken,
+            "contactsMobile": contactsMobile,
+            "orderSn": ordersn
         }
+        data=self.reqtemplate("../data/trip-order/order.yaml", data, "remessage")
         return self.send(data)
 
     #小程序核销
     def miniverify(self,scenicSpotId,verifyCode):
-        data={
-            "method": "post",
-            'url': "http://yjy.zhiyousx.com:8765/api/order/order/ticket/app/verify",
-            "headers": {"Authorization": self.gytoken, "Content-Type": "application/json"},
-            "json": {
-                "scenicSpotId": scenicSpotId,
-                "verifyCode": verifyCode
+        data= {
+            "gytoken": self.gytoken,
+            "scenicSpotId": scenicSpotId,
+            "verifyCode": verifyCode
             }
-        }
+        data=self.reqtemplate("../data/trip-order/order.yaml", data, "miniverify")
         return self.send(data)
+
+    # 分销用户常用旅客
+    def TopContactsList(self):
+        data={
+            "fxtoken": self.fxtoken
+        }
+        data=self.reqtemplate("../data/trip-order/order.yaml", data, "TopContactsList")
+        return self.send(data)
+
+    # 消息队列测试接口
+    def mqTest(self):
+        data={
+            "fxtoken": self.fxtoken
+        }
+        data=self.reqtemplate("../data/trip-order/order.yaml", data, "mqTest")
+        return self.send(data)
+
+    #手动处理出票中订单到出票失败
+    def ManualProcessing(self,buyorderid):
+        data={
+            "fxtoken": self.fxtoken,
+            "buyorderid": buyorderid
+        }
+        data=self.reqtemplate("../data/trip-order/order.yaml", data, "ManualProcessing")
+        return self.send(data)
+
+    #手动处理退款中订单
+    def manuallyProcessRefundOrders(self,buyorderid):
+        data={
+            "fxtoken": self.fxtoken,
+            "buyorderid": buyorderid,
+            "status":0
+        }
+        data=self.reqtemplate("../data/trip-order/order.yaml", data, "ManualProcessing")
+        return self.send(data)
+
 
 if __name__ == '__main__':
     a=ApiOrder()
     id=a.buyprocedure('2020-08-21','1317')
-
-
-if __name__ == '__main__':
-    ApiOrder()

@@ -14,3 +14,9 @@ class TestProduct:
         with allure.step("创建产品"):
             re=self.a.create_product()
             assert re["msg"] == "success"
+
+    @allure.story("修改产品")
+    def test_modifyproduct(self):
+        re=self.a.modify_product()
+        assert re["msg"] == "success"
+
