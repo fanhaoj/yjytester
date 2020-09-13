@@ -1,6 +1,7 @@
 test_buy: #下单产品id
-  - 1413  #日期模式
-  - 1415  #有效期模式
+#  - 1413  #日期模式
+#  - 1415  #有效期模式
+  - 1423  #去买票日期
   #- 1111  #分时段模式
 
 test_miniverify: #小程序核销
@@ -11,10 +12,6 @@ test_miniverify: #小程序核销
     - 1415
     - 298
 
-verify: #一机游内部核销
-  - productid: 1317
-    scenicSpotId: 1
-
 proqmp: #去买票产品
   productid: 1409
-  scenicSpotId: 1
+  scenicSpotId: 298
