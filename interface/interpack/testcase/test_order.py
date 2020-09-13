@@ -15,8 +15,8 @@ class TestOrder:
     def setup(self):
         self.api=ApiOrder()
 
-    def teardown(self):
-        pass
+    # def teardown(self):
+    #     Until().delete_order()
 
 
     @allure.story("下单")
@@ -62,15 +62,7 @@ class TestOrder:
         orderid = self.api.buyprocedure(productid)['data']['id']
         print(orderid)
         self.api.payprocedure(orderid)
-        try:
-            orderstatus = self.api.ticketdetail(orderid)["data"]["orderStatus"]
-            assert orderstatus == 3
-        except:
-            bool = True
-            while (bool):
-                orderstatus = self.api.ticketdetail(orderid)["data"]["orderStatus"]
-                if orderstatus == 3:
-                    bool = False
+        self.api.waitorderstatus(orderid,3)
         json = self.api.verify(orderid)
         assert json["msg"] == "success"
 
@@ -79,15 +71,7 @@ class TestOrder:
     def test_miniverify(self, productid, scenicSpotId):
         orderid = self.api.buyprocedure(productid)['data']['id']
         self.api.payprocedure(orderid)
-        try:
-            orderstatus=self.api.ticketdetail(orderid)["data"]["orderStatus"]
-            assert orderstatus == 3
-        except:
-            bool=True
-            while(bool):
-                orderstatus = self.api.ticketdetail(orderid)["data"]["orderStatus"]
-                if orderstatus == 3:
-                    bool=False
+        self.api.waitorderstatus(orderid, 3)
         verifycode = self.api.ticketdetail(orderid)["data"]["ticketInfo"][0]['verifyCode']
         json = self.api.miniverify(scenicSpotId, verifycode)
         assert json["msg"] == "success"

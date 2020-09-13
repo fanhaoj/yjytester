@@ -60,6 +60,23 @@ class ApiOrder(BaseApi):
         data=self.reqtemplate("../data/trip-order/order.yaml", data, "ticketdetail")
         return self.send(data)
 
+    def waitorderstatus(self, orderid,status):
+        """
+
+        :param orderid: 订单id
+        :param status: 状态
+        """
+        try:
+            orderstatus = self.ticketdetail(orderid)["data"]["orderStatus"]
+            assert orderstatus == status
+        except:
+            bool = True
+            while (bool):
+                orderstatus = self.ticketdetail(orderid)["data"]["orderStatus"]
+                if orderstatus == status:
+                    bool = False
+
+
     # h5页面订单详情查询
     def verify_h5(self,buyorderid):
         data={

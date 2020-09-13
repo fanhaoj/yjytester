@@ -1,7 +1,7 @@
 import time
 
 import yaml
-
+import pymysql
 from interface.interpack.api.base_api import BaseApi
 
 
@@ -79,6 +79,30 @@ class Until(BaseApi):
             print(re)
             return re
 
+    def delete_order(self):
+        """
+            teardown 创建订单后删除创建的订单
+        """
+        conn = pymysql.connect(host="mysql-cn-north-1-05454410e59740b2.public.jcloud.com", port=3306, user="yjy_mysql", passwd="Zz36952751",database="introtec_trip_cloud",charset="utf8")
+        cursor=conn.cursor()
+        sql1="""
+            DELETE from trip_order_info ORDER BY id desc limit 2;
+            """
+        sql2 = """
+            DELETE from trip_order_ticket ORDER BY id desc limit 2;
+               """
+        sql3 = """
+            DELETE from trip_order ORDER BY id desc limit 2;
+               """
+        try:
+            cursor.execute(sql1)
+            cursor.execute(sql2)
+            cursor.execute(sql3)
+            conn.commit()
+        except pymysql.Error as e:
+            error = 'MySQL execute failed! ERROR (%s): %s' % (e.args[0], e.args[1])
+            print(error)
+        conn.close()
 
 
 
@@ -87,4 +111,5 @@ class Until(BaseApi):
 
 if __name__ == '__main__':
     # Until().convent_yaml()
-    Until().makedatatest("../data/trip-order/order_data.yaml","proqmp","productid")
+    # Until().makedatatest("../data/trip-order/order_data.yaml","proqmp","productid")
+    Until().delete_order()
