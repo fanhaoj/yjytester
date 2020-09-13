@@ -68,7 +68,7 @@ class ApiOrder(BaseApi):
         try:
             orderstatus = self.ticketdetail(orderid)["data"]["orderStatus"]
             assert orderstatus == status
-        except:
+        except Exception as e:
             bool = True
             while (bool):
                 orderstatus = self.ticketdetail(orderid)["data"]["orderStatus"]

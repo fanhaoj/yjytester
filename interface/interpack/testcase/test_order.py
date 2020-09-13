@@ -12,9 +12,9 @@ from interface.interpack.until.until import Until
 # pytest  -v test_order.py --allure-stories "核销订单"
 class TestOrder:
     date = Until()
-
-    def setup(self):
-        self.api=ApiOrder()
+    api = ApiOrder()
+    # def setup(self):
+    #     self.api=ApiOrder()
 
 
     # def teardown(self):
