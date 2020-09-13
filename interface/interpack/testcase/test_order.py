@@ -20,12 +20,11 @@ class TestOrder:
 
 
     @allure.story("下单")
-    @pytest.mark.parametrize("productid", [Until().makedatatest("../data/trip-order/order_data.yaml","proqmp","productid")])
-    def test_buyandpay(self, productid):
+    @pytest.mark.parametrize("productid", [Until().makedatatest("../data/trip-order/order_data.yaml","proyjy","productid")])
+    def test_buy(self, productid):
         print(productid)
         with allure.step("下单"):
-            orderid = self.api.buyprocedure(productid)['data']['id']
-            json = self.api.payprocedure(orderid)
+            json = self.api.buyprocedure(productid)
             assert json["msg"] == "success"
 
     @allure.story("下单支付")
