@@ -112,5 +112,5 @@ class Until(BaseApi):
 
 if __name__ == '__main__':
     # Until().convent_yaml()
-    # Until().makedatatest("../data/trip-order/order_data.yaml","proqmp","productid")
-    Until().delete_order()
+    Until().makedatatest("../data/trip-order/order_data.yaml","test_miniverify")
+    # Until().delete_order()
