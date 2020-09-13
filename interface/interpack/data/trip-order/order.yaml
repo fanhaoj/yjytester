@@ -11,6 +11,7 @@ buyprocedure: #下单
     touristInfo:
     - mobile: '15009253686'
       name: 测试
+      idCard: 610102199212251920
 
 payprocedure: #支付
   method: post

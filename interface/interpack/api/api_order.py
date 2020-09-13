@@ -39,7 +39,6 @@ class ApiOrder(BaseApi):
             "buyorderid":buyorderid
         }
         data=self.reqtemplate("../data/trip-order/order.yaml", data, "refund")
-        print(self.send(data))
         return self.send(data)
 
     #核销
@@ -153,4 +152,4 @@ class ApiOrder(BaseApi):
 
 if __name__ == '__main__':
     a=ApiOrder()
-    a.ticketdetail(117190)
+    a.waitorderstatus(117283,3)

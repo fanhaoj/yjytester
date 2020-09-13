@@ -1,5 +1,11 @@
-proyjy: #一机游内部转分销
-    productid: 1317
+test_buy: #下单产品id
+  - 1413  #日期模式
+  - 1415  #有效期模式
+
+
+
+verify: #一机游内部核销
+  - productid: 1317
     scenicSpotId: 1
 
 proqmp: #去买票产品

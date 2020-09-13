@@ -25,7 +25,7 @@ class Until(BaseApi):
             "url": "http://yjy.zhiyousx.com:8765/api/auth/jwt/token",
             "headers": {"Content-Type": "application/json"},
               "json":{
-                "username": "ziyuan",
+                "username": "haofanyjy",
                 "password": "123456",
                 "platformType": "NORMAL"
             }
@@ -66,7 +66,7 @@ class Until(BaseApi):
         date = "2022-12-31"
         return date
 
-    def makedatatest(self,file,proname,key):
+    def makedatatest(self,file,proname):
         """
 
         :param file:添加数据驱动文件
@@ -75,8 +75,9 @@ class Until(BaseApi):
         :return:
         """
         with open(file,"r",encoding='utf-8') as f:
-            re=str(yaml.safe_load(f)[proname][key])
+            re=yaml.safe_load(f)[proname]
             print(re)
+            print(type(re))
             return re
 
     def delete_order(self):
