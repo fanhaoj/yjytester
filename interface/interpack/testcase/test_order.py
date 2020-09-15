@@ -37,17 +37,13 @@ class TestOrder:
             assert json["msg"] == "success"
 
     @allure.story("第三方下单支付")
-    @pytest.mark.parametrize("productid,status", date.makedatatest("../data/trip-order/order_data.yaml","test_buyandpaythird"))
+    @pytest.mark.parametrize("productid", date.makedatatest("../data/trip-order/order_data.yaml","test_buyandpaythird"))
     def test_buyandpaythird(self, productid,status):
         with allure.step("下单"):
-            if status == 1:
                 orderid = self.api.buyprocedure(productid)['data']['id']
                 json = self.api.payprocedure(orderid)
                 assert json["msg"] == "success"
-            else:
-                orderid = self.api.buyprocedure(productid)['data']['id']
-                json = self.api.payprocedure(orderid)
-                assert json["msg"] == "success"
+
 
 
     @allure.link("http://www.baidu.com", name="小百")
