@@ -10,3 +10,4 @@ class TestAlarmsystem:
         json=self.api.getErrorType()
         assert json["msg"] == "success"
         assert json["code"] == 0
+

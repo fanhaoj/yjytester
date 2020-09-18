@@ -16,9 +16,8 @@ class TestOrder:
     # def setup(self):
     #     self.api=ApiOrder()
 
-
-    # def teardown(self):
-    #     Until().delete_order()
+    def teardown(self):
+        Until().delete_order()
 
 
     @allure.story("下单")
@@ -38,7 +37,7 @@ class TestOrder:
 
     @allure.story("第三方下单支付")
     @pytest.mark.parametrize("productid", date.makedatatest("../data/trip-order/order_data.yaml","test_buyandpaythird"))
-    def test_buyandpaythird(self, productid,status):
+    def test_buyandpaythird(self, productid):
         with allure.step("下单"):
                 orderid = self.api.buyprocedure(productid)['data']['id']
                 json = self.api.payprocedure(orderid)
@@ -80,7 +79,6 @@ class TestOrder:
     @allure.story("小程序核销")
     @pytest.mark.parametrize("productid,scenicSpotId", date.makedatatest("../data/trip-order/order_data.yaml","test_miniverify"))
     def test_miniverify(self, productid, scenicSpotId):
-        print(productid,scenicSpotId)
         orderid = self.api.buyprocedure(productid)['data']['id']
         self.api.payprocedure(orderid)
         self.api.waitorderstatus(orderid, 3)
@@ -98,15 +96,17 @@ class TestOrder:
         json=self.api.mqTest()
         assert json["msg"] == "success"
 
-    @allure.story("手动处理出票中订单到出票失败")
-    def test_ManualProcessing(self):
-        json=self.api.ManualProcessing()
-        assert json["msg"] == "success"
+    # @pytest.mark.parametrize("productid", date.makedatatest("../data/trip-order/order_data.yaml", "test_buy"))
+    # @allure.story("手动处理出票中订单到出票失败")
+    # def test_ManualProcessing(self,productid):
+    #     orderid = self.api.buyprocedure(productid)['data']['id']
+    #     json=self.api.ManualProcessing(orderid)
+    #     assert json["msg"] == "success"
 
-    @allure.story("手动处理退款中订单")
-    @pytest.mark.parametrize("buyorderid", [])
-    def test_manuallyProcessRefundOrders(self,buyorderid):
-        orderid = self.api.buyprocedure()
-        json=self.api.manuallyProcessRefundOrders(buyorderid)
-        assert json["msg"] == "success"
+    # @allure.story("手动处理退款中订单")
+    # @pytest.mark.parametrize("buyorderid", [])
+    # def test_manuallyProcessRefundOrders(self,buyorderid):
+    #     orderid = self.api.buyprocedure()
+    #     json=self.api.manuallyProcessRefundOrders(buyorderid)
+    #     assert json["msg"] == "success"
 

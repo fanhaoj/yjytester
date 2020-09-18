@@ -1,0 +1,91 @@
+buyprocedure_fx: #下单
+  method: post
+  url: http://yjy.zhiyousx.com:8765/api/openApi/order/ticket/create
+  headers:
+    Content-Type: application/json
+    apiKey: '6310931416'
+    curTime: ${curTime}
+    nonce: '123456'
+    sign: ${sign}
+  json:
+    contactsIdCard: '610102199212251920'
+    contactsMobile: '13891306258'
+    contactsName: 测试
+    departDate: ${date}
+    endTime: '23:30'
+    productId: $productId
+    productNum: 1
+    sellerOrderSn: ${sellerOrderSn}
+    startTime: '08:00'
+    touristInfo:
+      - email: 286305896@qq.com
+        idCard: '610102199212251920'
+        mobile: '15009253686'
+        name: 测试
+
+payprocedure_fx: #支付
+  method: post
+  url: http://yjy.zhiyousx.com:8765/api/openApi/order/ticket/pay
+  headers:
+    Content-Type: application/json
+    apiKey: '6310931416'
+    curTime: ${curTime}
+    nonce: '123456'
+    sign: ${sign}
+  json:
+    orderSn: ${orderSn}
+
+refund_fx: #退款
+  method: post
+  url: http://yjy.zhiyousx.com:8765/api/openApi/order/ticket/refund
+  headers:
+    Content-Type: application/json
+    apiKey: '6310931416'
+    curTime: ${curTime}
+    nonce: '123456'
+    sign: ${sign}
+  json:
+    orderSn: ${orderSn}
+    refundNum: 1
+    refundReason: 测试
+    sellerRefundSn: '454545454545'
+
+getpricecalendar_fx: #获取价格日历
+  method: post
+  url: http://yjy.zhiyousx.com:8765/api/openApi/ticket/price/pull
+  headers:
+    Content-Type: application/json
+    apiKey: '6310931416'
+    curTime: ${curTime}
+    nonce: '123456'
+    sign: ${sign}
+  json:
+    ticketId: $productId
+
+selectorder_fx: #分销商订单查询
+  method: post
+  url: http://yjy.zhiyousx.com:8665/api/openApi/order/ticket/query
+  headers:
+    Content-Type: application/json
+    apiKey: '6310931416'
+    curTime: ${curTime}
+    nonce: '123456'
+    sign: ${sign}
+  json:
+    orderSn: ${orderSn}
+
+selectproduct_fx: #查询门票信息
+  method: post
+  url: http://yjy.zhiyousx.com:8765/api/openApi/ticket/pull
+  headers:
+    Content-Type: application/json
+    apiKey: '6310931416'
+    curTime: ${curTime}
+    nonce: '123456'
+    sign: ${sign}
+  json:
+    ticketId: $productId
+
+#推送出票通知
+#推送核销通知
+#推送退款通知

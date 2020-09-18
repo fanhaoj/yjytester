@@ -10,6 +10,13 @@ import requests
 class GetSign:
     #sha1加密生成sign签名
     def getsign(self,apiKey,apiSecret,nonce):
+        """
+
+        :param apiKey:
+        :param apiSecret:
+        :param nonce:
+        :return:
+        """
         self.time=int(time.time())
         data='apiKey='+str(apiKey)+'&'+'apiSecret='+str(apiSecret)+'&'+'curTime='+str(self.time)+'&'+'nonce='+str(nonce)
         print(data)

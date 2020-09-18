@@ -1,3 +1,4 @@
+import hashlib
 import time
 
 import yaml
@@ -47,8 +48,27 @@ class Until(BaseApi):
                 }
             ]
         }
-        with open("../data/trip-order/order_data.yaml", "w", encoding='utf-8') as f:
+        with open("../data/trip-order/order_fenxiao.yaml", "w", encoding='utf-8') as f:
             yaml.safe_dump(data=data,stream=f,allow_unicode=True)
+
+    def getsign(self,apiKey,apiSecret,nonce):
+        """
+
+        :param apiKey:
+        :param apiSecret:
+        :param nonce:随机数
+        :return:密钥列表
+        """
+        self.time=int(time.time())
+        data='apiKey='+str(apiKey)+'&'+'apiSecret='+str(apiSecret)+'&'+'curTime='+str(self.time)+'&'+'nonce='+str(nonce)
+        sha1 = hashlib.sha1()
+        sha1.update(data.encode('utf-8'))
+        sha1_data=sha1.hexdigest()
+        list=[]
+        list.append(self.time)
+        list.append(sha1_data)
+        print(list)
+        return list
 
     def begindate(self):
         """
@@ -111,6 +131,6 @@ class Until(BaseApi):
 
 
 if __name__ == '__main__':
-    # Until().convent_yaml()
-    Until().makedatatest("../data/trip-order/order_data.yaml","test_miniverify")
+    Until().getsign('6310931416','264V35g1xl3623777Q4yCEj02k4MY663','123456')
+    # Until().makedatatest("../data/trip-order/order_data.yaml","test_miniverify")
     # Until().delete_order()
