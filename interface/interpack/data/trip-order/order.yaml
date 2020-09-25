@@ -17,7 +17,7 @@ buyprocedure: #下单
 
 payprocedure: #支付
   method: post
-  url: http://yjy.zhiyousx.com:8765/api/openApi/order/ticket/pay
+  url: http://yjy.zhiyousx.com:8765/api/order/order/ticket/pay/credit
   headers:
     Authorization: $fxtoken
   params:
