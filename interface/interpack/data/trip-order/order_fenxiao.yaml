@@ -48,7 +48,6 @@ refund_fx: #退款
     orderSn: ${orderSn}
     refundNum: 1
     refundReason: 测试
-    sellerRefundSn: '454545454545'
 
 getpricecalendar_fx: #获取价格日历
   method: post

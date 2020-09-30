@@ -1,4 +1,5 @@
 import json
+import time
 from string import Template
 import logging
 import requests
@@ -9,9 +10,10 @@ class BaseApi():
     logging.basicConfig(level=logging.INFO)
 
     def send(self,data):
+        date = time.strftime("%H-%M-%S", time.localtime())
         self.env = yaml.safe_load(open("../data/env.yaml", "r"))
         data["url"]=str(data["url"]).replace("yjy.zhiyousx.com:8765",self.env["test-env"][self.env["default"]])
-        logging.info("请求数据: " +repr(data)+ "\n")
+        logging.info(date+" 请求数据: " +repr(data)+ "\n")
         json=requests.request(**data).json()
         logging.info("响应数据: " +repr(json)+ "\n")
         return json

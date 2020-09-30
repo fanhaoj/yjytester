@@ -73,7 +73,7 @@ class ApiOrderfx(BaseApi):
         data={
             "curTime": self.sign[0],
             "sign": self.sign[1],
-            "productId": orderSn
+            "orderSn": orderSn
         }
         data=self.reqtemplate("../data/trip-order/order_fenxiao.yaml",data,'selectorder_fx')
         return self.send(data)
@@ -101,6 +101,11 @@ class ApiOrderfx(BaseApi):
         }
         return self.send(data)
 
+
+if __name__ == '__main__':
+    a=ApiOrderfx().sellerordercreate()["sellerOrderSn"]
+    print(a)
+    # ApiOrderfx().buyprocedure_fx('1413','6273084')
 
 
 
