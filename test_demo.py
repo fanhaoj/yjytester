@@ -10,6 +10,10 @@ from time import sleep
 
 import pytest
 import requests
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
+
 
 class Test_interyjy():
     # def setup(self):
@@ -41,3 +45,11 @@ class Test_interyjy():
         result=r.text
         print(result)
         assert r.status_code == 200
+
+    @pytest.mark.parametrize('data',[1,2,3,4])
+    def test_demo2(self,data):
+        print(data)
+
+    def test_ecwait(self):
+        WebDriverWait.until(expected_conditions.element_has_css_class(By.XPATH,'ssd'))
+        WebDriverWait.until(wait)

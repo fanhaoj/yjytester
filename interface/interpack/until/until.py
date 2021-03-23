@@ -38,17 +38,63 @@ class Until(BaseApi):
         生成yaml文件
         """
         data={
-            "departDate": "2020-08-19",
-            "productId": "1317",
-            "productNum": "1",
-            "touristInfo": [
-                {
-                    "name": "测试",
-                    "mobile": "15009253686"
-                }
-            ]
+    "dateType": "2",
+    "stockLimit": 1,
+    "ticketName": "autotest",
+    "sceneryName": "云创科技",
+    "scenicSpotId": "1",
+    "scenicSpotName": "云创科技",
+    "sceneryId": "71",
+    "sellType": "ALL",
+    "sellDate": [
+        {
+            "beginSellDate": "2021-03-17",
+            "endSellDate": "2022-03-31",
+            "setWeeks": [
+                "7",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6"
+            ],
+            "dailyStock": "-1",
+            "costAmount": "0.01",
+            "agentAmount": "0.01",
+            "storeAmount": "0.01",
+            "marketAmount": "0.01"
         }
-        with open("../data/trip-order/order_fenxiao.yaml", "w", encoding='utf-8') as f:
+    ],
+    "bookDayLimit": "0",
+    "bookTimeLimit": "23:59",
+    "minBookNum": "1",
+    "maxBookNum": "999",
+    "validityPeriod": {
+        "type": 1
+    },
+    "checkMode": "0",
+    "refundCheckMode": "1",
+    "refundRuleType": "3",
+    "expiringOperation": "1",
+    "isPartialRefund": "0",
+    "isRefund": 0,
+    "touristInfoType": "1",
+    "verifyType": "1",
+    "printState": "0",
+    "isSendSms": "1",
+    "feeIncludes": "<p>fe</p>",
+    "feeNotIncludes": "<p>few</p>",
+    "reachWay": "<p>we</p>",
+    "refundNote": "<p>qwer</p>",
+    "bookNote": "<p>wqerqwer</p>",
+    "thirdPlatformId": "0",
+    "thirdProductId": 0,
+    "thirdSceneryId": 0,
+    "thirdSupplierId": "",
+    "status": 1
+}
+        with open("../data/trip-order/order_fenxiaotstswesetse.yaml", "w", encoding='utf-8') as f:
             yaml.safe_dump(data=data,stream=f,allow_unicode=True)
 
     def getsign(self,apiKey,apiSecret,nonce):
@@ -60,7 +106,8 @@ class Until(BaseApi):
         :return:密钥列表
         """
         self.time=int(time.time())
-        data='apiKey='+str(apiKey)+'&'+'apiSecret='+str(apiSecret)+'&'+'curTime='+str(self.time)+'&'+'nonce='+str(nonce)
+        # data='apiKey='+str(apiKey)+'&'+'apiSecret='+str(apiSecret)+'&'+'curTime='+str(self.time)+'&'+'nonce='+str(nonce)
+        data = str(apiKey) + str(nonce)+ str(self.time)+str(apiSecret)  #曲文旅靠谱小程序芙蓉园sign
         sha1 = hashlib.sha1()
         sha1.update(data.encode('utf-8'))
         sha1_data=sha1.hexdigest()
@@ -131,6 +178,8 @@ class Until(BaseApi):
 
 
 if __name__ == '__main__':
-    Until().getsign('6310931416','264V35g1xl3623777Q4yCEj02k4MY663','123456')
+    Until().convent_yaml()
+    # a=Until().getsign('6310931416','264V35g1xl3623777Q4yCEj02k4MY663','123456')
+    # print(a[0],a[1])
     # Until().makedatatest("../data/trip-order/order_data.yaml","test_miniverify")
     # Until().delete_order()

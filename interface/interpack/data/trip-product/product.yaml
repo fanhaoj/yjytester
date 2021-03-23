@@ -5,17 +5,35 @@ createproduct:
     Authorization: ${gytoken}
     Content-Type: application/json
   json:
+    bookDayLimit: '0'
+    bookNote: <p>wqerqwer</p>
+    bookTimeLimit: '23:59'
+    checkMode: '0'
     dateType: '2'
-    stockLimit: 1
-    ticketName: autotest
+    expiringOperation: '1'
+    feeIncludes: <p>fe</p>
+    feeNotIncludes: <p>few</p>
+    isPartialRefund: '0'
+    isRefund: 0
+    isSendSms: '1'
+    maxBookNum: '999'
+    minBookNum: '1'
+    printState: '0'
+    reachWay: <p>we</p>
+    refundCheckMode: '1'
+    refundNote: <p>qwer</p>
+    refundRuleType: '3'
+    sceneryId: '71'
     sceneryName: 云创科技
     scenicSpotId: '1'
     scenicSpotName: 云创科技
-    sceneryId: '71'
-    sellType: ALL
     sellDate:
-      - beginSellDate: ${begindate}
+      - agentAmount: '0.01'
+        beginSellDate: ${begindate}
+        costAmount: '0.01'
+        dailyStock: '-1'
         endSellDate: ${enddate}
+        marketAmount: '0.01'
         setWeeks:
           - '7'
           - '1'
@@ -24,37 +42,20 @@ createproduct:
           - '4'
           - '5'
           - '6'
-        dailyStock: '26'
-        costAmount: '0.01'
-        agentAmount: '0.01'
         storeAmount: '0.01'
-        marketAmount: '0.01'
-    bookDayLimit: '0'
-    bookTimeLimit: '23:59'
-    minBookNum: '1'
-    maxBookNum: '999'
-    validityPeriod:
-      type: 1
-    checkMode: '0'
-    refundCheckMode: '1'
-    refundRuleType: '3'
-    isPartialRefund: '0'
-    isRefund: 0
-    touristInfoType: '1'
-    verifyType: '1'
-    printState: '0'
-    isSendSms: '0'
-    smsContent: 尊敬的游客，您的订单$code$已预约成功，游玩日期$day$，$password$表示验证码，$qrcode$表示二维码，$thirdOrderSn$表示订单号入园专用。祝您旅途愉快！咨询电话029-89663510。
-    feeIncludes: "<p>fda</p>"
-    feeNotIncludes: "<p>asdf</p>"
-    reachWay: "<p>asd2323</p>"
-    refundNote: "<p>23</p>"
-    bookNote: "<p>dss</p>"
+    sellType: ALL
+    status: 1
+    stockLimit: 1
     thirdPlatformId: '0'
     thirdProductId: 0
     thirdSceneryId: 0
     thirdSupplierId: ''
-    status: 1
+    ticketName: autotest
+    touristInfoType: '1'
+    validityPeriod:
+      type: 1
+    verifyType: '1'
+
 
 modify:
   method: post

@@ -16,8 +16,8 @@ class TestOrder:
     # def setup(self):
     #     self.api=ApiOrder()
 
-    def teardown(self):
-        Until().delete_order()
+    # def teardown(self):
+    #     Until().delete_order()
 
 
     @allure.story("下单")
@@ -25,6 +25,7 @@ class TestOrder:
     def test_buy(self, productid):
         with allure.step("下单"):
             json = self.api.buyprocedure(productid)
+            # assert json == self.method(productid)
             assert json["msg"] == "success"
 
     @allure.story("下单支付")

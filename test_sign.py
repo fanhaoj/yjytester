@@ -61,9 +61,9 @@ class GetSign:
         print(r.json())
 if __name__ == '__main__':
     gt=GetSign()
-    dd=gt.getsign('emhhamkxZDQwNzYzYjQ=','emhhamkxNTJkZTFkMThjNmEyNDZjMQ==','123456')
+    dd=gt.getsign('lvyouwang','lvyouwang123','123456')
     print(dd)
-    gt.test_create(str(dd[0]),dd[1])
+    # gt.test_create(str(dd[0]),dd[1])
 
 
 
